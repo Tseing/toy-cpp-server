@@ -1,9 +1,11 @@
+#include "utils.h"
 #include <arpa/inet.h>
 #include <cstring>
 
 int main() {
   // 与 server.cpp 相同的方式初始化 socket
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  errif(sockfd == -1, "socket create error");
 
   struct sockaddr_in serv_addr;
   bzero(&serv_addr, sizeof(serv_addr));
@@ -13,7 +15,8 @@ int main() {
   serv_addr.sin_port = htons(8008);
 
   // 连接服务端
-  connect(sockfd, (sockaddr*)&serv_addr, sizeof(serv_addr));
+  errif(connect(sockfd, (sockaddr *)&serv_addr, sizeof(serv_addr)) == -1,
+        "socket connet error");
 
   return 0;
 }

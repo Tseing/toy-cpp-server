@@ -1,3 +1,4 @@
+#include "utils.h"
 #include <arpa/inet.h>
 #include <cstring>
 #include <iostream>
@@ -5,6 +6,7 @@
 int main() {
   // 初始化 socket
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  errif(sockfd == -1, "socket create error");
 
   // 声明 IP 地址结构体，以 0 初始化
   struct sockaddr_in serv_addr;
@@ -16,10 +18,11 @@ int main() {
   serv_addr.sin_port = htons(8008);
 
   // 将 IP 与 socket 绑定
-  bind(sockfd, (sockaddr *)&serv_addr, sizeof(serv_addr));
+  errif(bind(sockfd, (sockaddr *)&serv_addr, sizeof(serv_addr)) == -1,
+        "socket bind error");
 
   // 以最大值 SOMAXCONN (128) 监听 socket
-  listen(sockfd, SOMAXCONN);
+  errif(listen(sockfd, SOMAXCONN) == -1, "socket listen error");
 
   // 处理客户端连接
   struct sockaddr_in clnt_addr;
@@ -28,6 +31,7 @@ int main() {
 
   // 用 accept() 处理连接，accept() 会阻塞，直至有连接建立
   int clnt_sockfd = accept(sockfd, (sockaddr *)&clnt_addr, &clnt_addr_len);
+  errif(clnt_sockfd == -1, "socket accept error");
 
   std::cout << "new client fd " << clnt_sockfd
             << "! IP: " << inet_ntoa(clnt_addr.sin_addr)
