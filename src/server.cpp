@@ -2,6 +2,7 @@
 #include <arpa/inet.h>
 #include <cstring>
 #include <iostream>
+#include <unistd.h>
 
 int main() {
   // 初始化 socket
@@ -36,6 +37,31 @@ int main() {
   std::cout << "new client fd " << clnt_sockfd
             << "! IP: " << inet_ntoa(clnt_addr.sin_addr)
             << " Port: " << ntohs(clnt_addr.sin_port) << std::endl;
+
+  while (true) {
+    // 定义一个缓冲区
+    char buf[1024];
+    bzero(&buf, sizeof(buf));
+
+    // 从客户端读取数据到缓冲区，返回读取数据大小
+    ssize_t read_bytes = read(clnt_sockfd, buf, sizeof(buf));
+
+    if (read_bytes > 0) {
+      std::cout << "message from client fd " << clnt_sockfd << ": " << buf
+                << std::endl;
+      // 将相同数据写回客户端
+      write(clnt_sockfd, buf, sizeof(buf));
+    }
+    // 返回 0，EOF
+    else if (read_bytes == 0) {
+      std::cout << "client fd " << clnt_sockfd << " disconnected" << std::endl;
+    }
+    // 返回 -1，错误
+    else if (read_bytes == -1) {
+      close(clnt_sockfd);
+      errif(true, "socket read error");
+    }
+  }
 
   return 0;
 }
