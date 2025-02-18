@@ -5,14 +5,10 @@ Language: Cpp
 
 
 # 访问说明符(public、private等)的偏移
-AccessModifierOffset
-
-: -4
+AccessModifierOffset: -4
 
 # 开括号(开圆括号、开尖括号、开方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在开括号后换行)
-AlignAfterOpenBracket
-
-: Align
+AlignAfterOpenBracket: Align
 
 # 连续赋值时，对齐所有等号
 AlignConsecutiveAssignments: false
@@ -21,22 +17,16 @@ AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
 
 # 右对齐逃脱换行(使用反斜杠换行)的反斜杠
-AlignEscapedNewlines
-
-: Right
+AlignEscapedNewlines: Right
 
 # 水平对齐二元和三元表达式的操作数
-AlignOperands
-
-: true
+AlignOperands: true
 
 # 对齐连续的尾随的注释
 AlignTrailingComments: true
 
 # 不允许函数声明的所有参数在放在下一行
-AllowAllParametersOfDeclarationOnNextLine
-
-: false
+AllowAllParametersOfDeclarationOnNextLine: false
 
 # 不允许短的块放在同一行
 AllowShortBlocksOnASingleLine: true
@@ -64,21 +54,15 @@ AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true
 
 # false表示函数实参要么都在同一行，要么都各自一行
-BinPackArguments
-
-: true
+BinPackArguments: true
 
 # false表示所有形参要么都在同一行，要么都各自一行
-BinPackParameters
-
-: true
+BinPackParameters: true
 
 # 大括号换行，只有当BreakBeforeBraces
 
-设置为Custom时才有效
-BraceWrapping
-
-:
+# 设置为Custom时才有效
+BraceWrapping:
   # class定义后面
   AfterClass: false
   # 控制语句后面
@@ -109,9 +93,7 @@ BraceWrapping
   SplitEmptyNamespace: false
 
 # 在二元运算符前换行: None(在操作符后换行), NonAssignment(在非赋值的操作符前换行), All(在操作符前换行)
-BreakBeforeBinaryOperators
-
-: NonAssignment
+BreakBeforeBinaryOperators: NonAssignment
 
 # 在大括号前换行: Attach(始终将大括号附加到周围的上下文), Linux(除函数、命名空间和类定义，与Attach类似), 
 #   Mozilla(除枚举、函数、记录定义，与Attach类似), Stroustrup(除函数定义、catch、else，与Attach类似), 
@@ -120,14 +102,10 @@ BreakBeforeBinaryOperators
 BreakBeforeBraces: Custom
 
 # 在三元运算符前换行
-BreakBeforeTernaryOperators
-
-: false
+BreakBeforeTernaryOperators: false
 
 # 在构造函数的初始化列表的冒号后换行
-BreakConstructorInitializers
-
-: AfterColon
+BreakConstructorInitializers: AfterColon
 
 #BreakInheritanceList: AfterColon
 
